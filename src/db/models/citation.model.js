@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const CitationSchema = new mongoose.Schema({
   // Common Fields
-  
+
   authors: [{ type: String }], // Array of author names
   title: { type: String, required: true },
   publicationDate: { type: Date },
@@ -30,7 +30,9 @@ const CitationSchema = new mongoose.Schema({
   //     enum: ["APA", "MLA", "Chicago"],
   //     default: "APA",
   //   },
-  user: [{ type: mongoose.Schema.Types.ObjectId, ref: "UserModel" }],
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "UserModel" },
+  userId: { type: String },
+  
 });
 
 export const CitationModel = mongoose.model("CitationModel", CitationSchema);

@@ -15,7 +15,7 @@ export async function GET(req, res, next) {
     console.log("Connected to database");
     const users = await UserModel.find({});
     res.statusCode = 200;
-    console.log("User: " + users);
+    console.log("User: ", users);
     return NextResponse.json(users);
   } catch (error) {
     console.log(error);
@@ -33,10 +33,10 @@ export async function GET(req, res, next) {
 export async function POST(req, res, next) {
   const { username, email, password } = await req.json();
   await ConnectDB();
+
   const existingUser = await UserModel.findOne({
     $or: [{ email }, { username }],
-  });
-  console.log(existingUser);
+  }); 
   if (existingUser) {
     return NextResponse.json(
       { message: "user already exists" },
